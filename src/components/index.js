@@ -42,8 +42,10 @@ export default class HandsontableNotes extends Component {
   }
 
   componentDidMount() {
+    window.Handsontable = Handsontable;;
     this.hot = window.hot = new Handsontable(this.container, {
       licenseKey: 'non-commercial-and-evaluation',
+      title:"Hot title",
       data: Handsontable.helper.createSpreadsheetData(15, 20),
       width: '100%',
       height: 220,
@@ -53,7 +55,25 @@ export default class HandsontableNotes extends Component {
       stretchH: 'all',
       rowHeaders: true,
       fixedRowsTop: 2,
-      fixedColumnsLeft: 2
+      fixedColumnsLeft: 2,
+      customBorders: [
+        {
+          range: {
+            from: {
+              row: 1,
+              col: 1
+            },
+            to: {
+              row: 3,
+              col: 4
+            }
+          },
+          left: {},
+          right: {},
+          top: {},
+          bottom: {}
+        }
+      ],
     });
   }
 
