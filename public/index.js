@@ -4,11 +4,17 @@ import React from 'react';
 import './assets/style.scss';
 
 class App extends React.Component {
-  componentDidMount() {}
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
   render() {
     return (
       <div className="app-container">
-        <HandsontableNotes />
+        <HandsontableNotes>
+          <div className="is-extra"></div>
+        </HandsontableNotes>
       </div>
     );
   }

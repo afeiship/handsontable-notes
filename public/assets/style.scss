@@ -14,5 +14,17 @@ body,
 
 .app-container {
   box-sizing: border-box;
-  border: 1px solid #f00;
+
+  .handsontable-notes {
+    border: 1px solid #f60;
+    position: relative;
+  }
+
+  .is-extra {
+    position: absolute;
+    border: 2px dashed #00f;
+    top: 69px;
+    width: 100%;
+    z-index: 1000;
+  }
 }

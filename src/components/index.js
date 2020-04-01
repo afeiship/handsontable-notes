@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import noop from '@feizheng/noop';
 import Handsontable from 'handsontable';
+import 'handsontable/languages/zh-CN';
 import objectAssign from 'object-assign';
 
 const CLASS_NAME = 'handsontable-notes';
@@ -42,13 +43,15 @@ export default class HandsontableNotes extends Component {
   }
 
   componentDidMount() {
-    window.Handsontable = Handsontable;;
+    window.Handsontable = Handsontable;
     this.hot = window.hot = new Handsontable(this.container, {
       licenseKey: 'non-commercial-and-evaluation',
-      title:"Hot title",
-      data: Handsontable.helper.createSpreadsheetData(15, 20),
+      contextMenu: true,
+      language: 'zh-CN',
+      title: 'Hot title',
+      data: this.data,
       width: '100%',
-      height: 220,
+      // height: 220,
       colHeaders: true,
       manualColumnResize: true,
       manualRowResize: true,
@@ -56,26 +59,14 @@ export default class HandsontableNotes extends Component {
       rowHeaders: true,
       fixedRowsTop: 2,
       fixedColumnsLeft: 2,
-      customBorders: [
-        {
-          range: {
-            from: {
-              row: 1,
-              col: 1
-            },
-            to: {
-              row: 3,
-              col: 4
-            }
-          },
-          left: {},
-          right: {},
-          top: {},
-          bottom: {}
-        }
-      ],
+      afterChange: this.handleAfterChange,
+      readOnly: true
     });
   }
+
+  handleAfterChange = (e) => {
+    console.log('change!', e);
+  };
 
   render() {
     const { className, ...props } = this.props;
@@ -84,7 +75,8 @@ export default class HandsontableNotes extends Component {
         ref={(container) => (this.container = container)}
         data-component={CLASS_NAME}
         className={classNames(CLASS_NAME, className)}
-        {...props}></div>
+        {...props}
+      />
     );
   }
 }
